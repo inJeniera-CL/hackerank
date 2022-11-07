@@ -1,0 +1,35 @@
+
+Javiera Canales <javieracanales@gmail.com>
+mié, 26 oct, 1:50 (hace 12 días)
+para mí
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution{
+    public static void main(String[] args){
+        
+        Scanner in = new Scanner(System.in);
+        int testCases = Integer.parseInt(in.nextLine());
+        while(testCases>0){
+            String line = in.nextLine();
+            
+            String regex = "(<([a-zA-Z0-9 ]+)>)([a-zA-Z0-9 ]+)(</(\\2)>)([a-zA-Z0-9 <>/])?";
+            Pattern p = Pattern.compile(regex,1);
+            String linea2 = "None";
+            Matcher m = p.matcher(line);
+            //if (!(m.find())) {System.out.println("None");}
+            while (m.find()) {               
+                linea2 = m.group(3);
+                line = line.substring(m.end(4)); 
+                m = p.matcher(linea2);
+                while (m.find()) {linea2 = m.group(3);}
+            }
+            testCases--;
+            System.out.println(linea2);
+        }
+    }
+}
